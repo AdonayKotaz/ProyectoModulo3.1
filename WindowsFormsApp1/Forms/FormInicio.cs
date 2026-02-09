@@ -43,11 +43,30 @@ namespace WindowsFormsApp1.Forms
         private void FormInicio_Load(object sender, EventArgs e)
         {
             RedondearPanel(panel1, 20);
+            RedondearPanel(panel2, 20);
+            RedondearPanel(panel3, 20);
+            RedondearPanel(panel4, 20);
+            RedondearPanel(flowLayoutPanel1, 20);
+
             panelSombra.BackColor = Color.FromArgb(60, Color.Black);
             RedondearPanel(panelSombra, 20);
+
+            panelSombra2.BackColor = Color.FromArgb(60, Color.Black);
+            RedondearPanel(panelSombra2, 20);
+
+            panelSombra3.BackColor = Color.FromArgb(60, Color.Black);
+            RedondearPanel(panelSombra3, 20);
+
+            panelSombra4.BackColor = Color.FromArgb(60, Color.Black);
+            RedondearPanel(panelSombra4, 20);
         }
 
         private void panel1_SizeChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
         }
