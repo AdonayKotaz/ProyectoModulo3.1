@@ -49,6 +49,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
+            this.listViewTareas = new System.Windows.Forms.ListView();
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Fecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Hora = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Estado = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -170,6 +176,7 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.listViewTareas);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Location = new System.Drawing.Point(181, 231);
             this.panel3.Name = "panel3";
@@ -272,6 +279,41 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Registro";
             // 
+            // listViewTareas
+            // 
+            this.listViewTareas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Id,
+            this.Nombre,
+            this.Fecha,
+            this.Hora,
+            this.Estado});
+            this.listViewTareas.FullRowSelect = true;
+            this.listViewTareas.GridLines = true;
+            this.listViewTareas.HideSelection = false;
+            this.listViewTareas.Location = new System.Drawing.Point(9, 61);
+            this.listViewTareas.MultiSelect = false;
+            this.listViewTareas.Name = "listViewTareas";
+            this.listViewTareas.Size = new System.Drawing.Size(462, 132);
+            this.listViewTareas.TabIndex = 1;
+            this.listViewTareas.UseCompatibleStateImageBehavior = false;
+            this.listViewTareas.View = System.Windows.Forms.View.Details;
+            // 
+            // Id
+            // 
+            this.Id.Width = 0;
+            // 
+            // Nombre
+            // 
+            this.Nombre.Width = 220;
+            // 
+            // Fecha
+            // 
+            this.Fecha.Width = 100;
+            // 
+            // Hora
+            // 
+            this.Hora.Width = 80;
+            // 
             // FormInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -329,5 +371,11 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListView listViewTareas;
+        private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.ColumnHeader Nombre;
+        private System.Windows.Forms.ColumnHeader Fecha;
+        private System.Windows.Forms.ColumnHeader Hora;
+        private System.Windows.Forms.ColumnHeader Estado;
     }
 }

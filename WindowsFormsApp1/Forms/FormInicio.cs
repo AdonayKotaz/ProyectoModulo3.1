@@ -18,7 +18,7 @@ namespace WindowsFormsApp1.Forms
     public partial class FormInicio : Form
     {
 
-        private string connectionString = @"Data Source=|DataDirectory|\tareas.db;Version=3;";
+        string connectionString = @"Data Source=|DataDirectory|\tareas.db;Version=3;";
 
 
         public FormInicio()
@@ -26,6 +26,7 @@ namespace WindowsFormsApp1.Forms
 
             InitializeComponent();
             CrearTablaSiNoExiste();
+            CargarTareasPendientes();
             this.MaximizeBox = false;
 
             textBox1.Text = placeholder;
@@ -183,7 +184,9 @@ namespace WindowsFormsApp1.Forms
             Nombre TEXT NOT NULL,
             Descripcion TEXT,
             Fecha TEXT,
-            Hora TEXT
+            Hora TEXT,
+            Estado TEXTs
+
         );";
 
                 SQLiteCommand cmd = new SQLiteCommand(sql, conn);
@@ -197,6 +200,7 @@ namespace WindowsFormsApp1.Forms
             string descripcion = textBox2.Text;
             string fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
             string hora = dateTimePicker2.Value.ToString("HH:mm");
+           
 
             if (string.IsNullOrWhiteSpace(nombre) || nombre == "Nombre de tarea...")
             {
@@ -208,16 +212,23 @@ namespace WindowsFormsApp1.Forms
             {
                 conn.Open();
 
-                string query = "INSERT INTO Tareas (Nombre, Descripcion, Fecha, Hora) VALUES (@n, @d, @f, @h)";
+                string query = @"
+                INSERT INTO Tareas (Nombre, Descripcion, Fecha, Hora, Estado)
+                VALUES (@n, @d, @f, @h)"; 
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
 
                 cmd.Parameters.AddWithValue("@n", nombre);
                 cmd.Parameters.AddWithValue("@d", descripcion);
                 cmd.Parameters.AddWithValue("@f", fecha);
                 cmd.Parameters.AddWithValue("@h", hora);
+              
 
                 cmd.ExecuteNonQuery();
             }
+
+            //Actualizar datos
+            CargarTareasPendientes();
+
 
             // Limpiar campos
             textBox1.Text = placeholder;
@@ -228,5 +239,38 @@ namespace WindowsFormsApp1.Forms
 
             MessageBox.Show("Tarea agregada correctamente");
         }
+
+       
+
+        private void CargarTareasPendientes()
+        {
+            listViewTareas.Items.Clear();
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"
+        SELECT Id, Nombre, Fecha, Hora
+        FROM Tareas
+        ORDER BY Fecha, Hora";
+
+            
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    ListViewItem item = new ListViewItem(reader["Id"].ToString());
+                    item.SubItems.Add(reader["Nombre"].ToString());
+                    item.SubItems.Add(reader["Fecha"].ToString());
+                    item.SubItems.Add(reader["Hora"].ToString());
+
+                    listViewTareas.Items.Add(item);
+                }
+            }
+        }
+
+
     }
 }

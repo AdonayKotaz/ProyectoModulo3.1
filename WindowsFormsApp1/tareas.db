@@ -3,5 +3,6 @@ CREATE TABLE Tareas (
     Nombre TEXT NOT NULL,
     Descripcion TEXT,
     Fecha TEXT,
-    Hora TEXT
+    Hora TEXT,
+    Estado TEXT
 );
