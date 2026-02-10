@@ -213,7 +213,7 @@ namespace WindowsFormsApp1.Forms
                 conn.Open();
 
                 string query = @"
-                INSERT INTO Tareas (Nombre, Descripcion, Fecha, Hora, Estado)
+                INSERT INTO Tareas (Nombre, Descripcion, Fecha, Hora)
                 VALUES (@n, @d, @f, @h)"; 
                 SQLiteCommand cmd = new SQLiteCommand(query, conn);
 
@@ -271,6 +271,52 @@ namespace WindowsFormsApp1.Forms
             }
         }
 
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (listViewTareas.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selecciona una tarea primero");
+                return;
+            }
 
+            int id = int.Parse(listViewTareas.SelectedItems[0].Text);
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "DELETE FROM Tareas WHERE Id = @id";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+
+            CargarTareasPendientes();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listViewTareas.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selecciona una tarea");
+                return;
+            }
+
+            ListViewItem item = listViewTareas.SelectedItems[0];
+
+            FormEditarTarea frm = new FormEditarTarea();
+
+            frm.CargarDatos(
+                int.Parse(item.SubItems[0].Text), // Id
+                item.SubItems[1].Text,             // Nombre
+                DateTime.Parse(item.SubItems[2].Text),
+                DateTime.Parse(item.SubItems[3].Text)
+            );
+
+            frm.ShowDialog(); // 🔴 ventana flotante
+
+            CargarTareasPendientes(); // refrescar lista
+        }
     }
 }

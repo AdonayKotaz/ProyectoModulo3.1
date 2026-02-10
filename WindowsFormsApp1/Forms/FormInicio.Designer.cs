@@ -39,6 +39,11 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.listViewTareas = new System.Windows.Forms.ListView();
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Fecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Hora = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel5 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panelSombra = new System.Windows.Forms.Panel();
@@ -49,12 +54,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
-            this.listViewTareas = new System.Windows.Forms.ListView();
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Nombre = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Fecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Hora = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Estado = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -176,12 +177,52 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Controls.Add(this.button2);
+            this.panel3.Controls.Add(this.btnEliminar);
             this.panel3.Controls.Add(this.listViewTareas);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Location = new System.Drawing.Point(181, 231);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(596, 207);
             this.panel3.TabIndex = 4;
+            // 
+            // listViewTareas
+            // 
+            this.listViewTareas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Id,
+            this.Nombre,
+            this.Fecha,
+            this.Hora});
+            this.listViewTareas.FullRowSelect = true;
+            this.listViewTareas.GridLines = true;
+            this.listViewTareas.HideSelection = false;
+            this.listViewTareas.Location = new System.Drawing.Point(9, 61);
+            this.listViewTareas.MultiSelect = false;
+            this.listViewTareas.Name = "listViewTareas";
+            this.listViewTareas.Size = new System.Drawing.Size(406, 132);
+            this.listViewTareas.TabIndex = 1;
+            this.listViewTareas.UseCompatibleStateImageBehavior = false;
+            this.listViewTareas.View = System.Windows.Forms.View.Details;
+            // 
+            // Id
+            // 
+            this.Id.Text = "Id";
+            this.Id.Width = 0;
+            // 
+            // Nombre
+            // 
+            this.Nombre.Text = "Tarea";
+            this.Nombre.Width = 220;
+            // 
+            // Fecha
+            // 
+            this.Fecha.Text = "Fecha";
+            this.Fecha.Width = 100;
+            // 
+            // Hora
+            // 
+            this.Hora.Text = "Hora";
+            this.Hora.Width = 80;
             // 
             // panel5
             // 
@@ -279,40 +320,31 @@
             this.label5.TabIndex = 7;
             this.label5.Text = "Registro";
             // 
-            // listViewTareas
+            // btnEliminar
             // 
-            this.listViewTareas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Id,
-            this.Nombre,
-            this.Fecha,
-            this.Hora,
-            this.Estado});
-            this.listViewTareas.FullRowSelect = true;
-            this.listViewTareas.GridLines = true;
-            this.listViewTareas.HideSelection = false;
-            this.listViewTareas.Location = new System.Drawing.Point(9, 61);
-            this.listViewTareas.MultiSelect = false;
-            this.listViewTareas.Name = "listViewTareas";
-            this.listViewTareas.Size = new System.Drawing.Size(462, 132);
-            this.listViewTareas.TabIndex = 1;
-            this.listViewTareas.UseCompatibleStateImageBehavior = false;
-            this.listViewTareas.View = System.Windows.Forms.View.Details;
+            this.btnEliminar.BackColor = System.Drawing.Color.IndianRed;
+            this.btnEliminar.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnEliminar.Location = new System.Drawing.Point(434, 88);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 2;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // Id
+            // button2
             // 
-            this.Id.Width = 0;
-            // 
-            // Nombre
-            // 
-            this.Nombre.Width = 220;
-            // 
-            // Fecha
-            // 
-            this.Fecha.Width = 100;
-            // 
-            // Hora
-            // 
-            this.Hora.Width = 80;
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.button2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Olive;
+            this.button2.Location = new System.Drawing.Point(434, 59);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Editar";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // FormInicio
             // 
@@ -376,6 +408,7 @@
         private System.Windows.Forms.ColumnHeader Nombre;
         private System.Windows.Forms.ColumnHeader Fecha;
         private System.Windows.Forms.ColumnHeader Hora;
-        private System.Windows.Forms.ColumnHeader Estado;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button button2;
     }
 }
