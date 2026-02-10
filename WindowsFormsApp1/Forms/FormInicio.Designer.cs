@@ -39,21 +39,21 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.panelSombra = new System.Windows.Forms.Panel();
             this.panelSombra2 = new System.Windows.Forms.Panel();
             this.panelSombra3 = new System.Windows.Forms.Panel();
             this.panelSombra4 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -113,6 +113,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "Agregar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dateTimePicker2
             // 
@@ -175,6 +176,26 @@
             this.panel3.Size = new System.Drawing.Size(596, 207);
             this.panel3.TabIndex = 4;
             // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(67)))), ((int)(((byte)(87)))));
+            this.panel5.Controls.Add(this.label4);
+            this.panel5.Location = new System.Drawing.Point(9, 13);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(140, 33);
+            this.panel5.TabIndex = 0;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label4.Location = new System.Drawing.Point(7, 7);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(127, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Tarea pendiente";
+            // 
             // panelSombra
             // 
             this.panelSombra.BackColor = System.Drawing.Color.Black;
@@ -231,15 +252,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Nueva Tarea";
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(67)))), ((int)(((byte)(87)))));
-            this.panel5.Controls.Add(this.label4);
-            this.panel5.Location = new System.Drawing.Point(9, 13);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(140, 33);
-            this.panel5.TabIndex = 0;
-            // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(67)))), ((int)(((byte)(87)))));
@@ -248,17 +260,6 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(79, 28);
             this.panel6.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(7, 7);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 17);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Tarea pendiente";
             // 
             // label5
             // 
@@ -295,10 +296,10 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.ResumeLayout(false);

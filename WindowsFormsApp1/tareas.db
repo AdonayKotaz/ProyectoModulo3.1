@@ -1,0 +1,7 @@
+CREATE TABLE Tareas (
+    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Nombre TEXT NOT NULL,
+    Descripcion TEXT,
+    Fecha TEXT,
+    Hora TEXT
+);

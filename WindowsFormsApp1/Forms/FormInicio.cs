@@ -7,17 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
+
 
 namespace WindowsFormsApp1.Forms
 {
+    using System.Data.SQLite;
     using System.Drawing.Drawing2D;
 
     public partial class FormInicio : Form
     {
+
+        private string connectionString = @"Data Source=|DataDirectory|\tareas.db;Version=3;";
+
+
         public FormInicio()
         {
 
             InitializeComponent();
+            CrearTablaSiNoExiste();
             this.MaximizeBox = false;
 
             textBox1.Text = placeholder;
@@ -161,6 +169,64 @@ namespace WindowsFormsApp1.Forms
                 textBox2.Text = placeholder2;
                 textBox2.ForeColor = Color.Gray;
             }
+        }
+
+        private void CrearTablaSiNoExiste()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string sql = @"
+        CREATE TABLE IF NOT EXISTS Tareas (
+            Id INTEGER PRIMARY KEY AUTOINCREMENT,
+            Nombre TEXT NOT NULL,
+            Descripcion TEXT,
+            Fecha TEXT,
+            Hora TEXT
+        );";
+
+                SQLiteCommand cmd = new SQLiteCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string nombre = textBox1.Text;
+            string descripcion = textBox2.Text;
+            string fecha = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            string hora = dateTimePicker2.Value.ToString("HH:mm");
+
+            if (string.IsNullOrWhiteSpace(nombre) || nombre == "Nombre de tarea...")
+            {
+                MessageBox.Show("Ingrese un nombre válido");
+                return;
+            }
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "INSERT INTO Tareas (Nombre, Descripcion, Fecha, Hora) VALUES (@n, @d, @f, @h)";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+
+                cmd.Parameters.AddWithValue("@n", nombre);
+                cmd.Parameters.AddWithValue("@d", descripcion);
+                cmd.Parameters.AddWithValue("@f", fecha);
+                cmd.Parameters.AddWithValue("@h", hora);
+
+                cmd.ExecuteNonQuery();
+            }
+
+            // Limpiar campos
+            textBox1.Text = placeholder;
+            textBox1.ForeColor = Color.Gray;
+
+            textBox2.Text = placeholder2;
+            textBox2.ForeColor = Color.Gray;
+
+            MessageBox.Show("Tarea agregada correctamente");
         }
     }
 }
