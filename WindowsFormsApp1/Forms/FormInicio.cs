@@ -18,6 +18,20 @@ namespace WindowsFormsApp1.Forms
         {
 
             InitializeComponent();
+            this.MaximizeBox = false;
+
+            textBox1.Text = placeholder;
+            textBox1.ForeColor = Color.Gray;
+
+            textBox1.Enter += textBox1_Enter;
+            textBox1.Leave += textBox1_Leave;
+
+
+            textBox2.Text = placeholder2;
+            textBox2.ForeColor = Color.Gray;
+
+            textBox2.Enter += textBox2_Enter;
+            textBox2.Leave += textBox2_Leave;
 
         }
         private void RedondearPanel(Panel panel, int radio)
@@ -39,6 +53,8 @@ namespace WindowsFormsApp1.Forms
         {
 
         }
+
+
 
         private void FormInicio_Load(object sender, EventArgs e)
         {
@@ -69,6 +85,80 @@ namespace WindowsFormsApp1.Forms
         private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+      
+        private string placeholder = "Nombre de tarea...";
+        private string placeholder2 = "Descripción...";
+
+        private void textBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "Nombre de la tarea...")
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtUsuario_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if (textBox1.Tag?.ToString() == "placeholder")
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.Black;
+                textBox1.Tag = null;
+            }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                textBox1.Text = placeholder;
+                textBox1.ForeColor = Color.Gray;
+                textBox1.Tag = "placeholder";
+            }
+        }
+
+        private void textBox1_Enter_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text == placeholder)
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox1_Leave_1(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                textBox1.Text = placeholder;
+                textBox1.ForeColor = Color.Gray;
+            }
+        }
+
+        private void textBox2_Enter(object sender, EventArgs e)
+        {
+            if (textBox2.Text == placeholder2)
+            {
+                textBox2.Text = "";
+                textBox2.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                textBox2.Text = placeholder2;
+                textBox2.ForeColor = Color.Gray;
+            }
         }
     }
 }

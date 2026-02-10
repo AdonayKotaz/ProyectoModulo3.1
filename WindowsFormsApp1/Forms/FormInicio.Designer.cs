@@ -32,15 +32,19 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelSombra = new System.Windows.Forms.Panel();
             this.panelSombra2 = new System.Windows.Forms.Panel();
             this.panelSombra3 = new System.Windows.Forms.Panel();
             this.panelSombra4 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -80,12 +84,58 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.dateTimePicker2);
+            this.panel2.Controls.Add(this.dateTimePicker1);
+            this.panel2.Controls.Add(this.textBox2);
+            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(181, 82);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(596, 130);
             this.panel2.TabIndex = 3;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(9, 98);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 4;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.Gray;
+            this.textBox2.Location = new System.Drawing.Point(9, 66);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(462, 20);
+            this.textBox2.TabIndex = 3;
+            this.textBox2.Text = "Descripción...";
+            this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
+            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.Gray;
+            this.textBox1.Location = new System.Drawing.Point(9, 40);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(462, 20);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "Nombre de la tarea...";
+            this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter_1);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave_1);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(16, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(148, 18);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Agrega una tarea";
             // 
             // panel3
             // 
@@ -131,26 +181,6 @@
             this.panelSombra4.Size = new System.Drawing.Size(607, 140);
             this.panelSombra4.TabIndex = 8;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(475, 88);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(108, 30);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(16, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(148, 18);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Agrega una tarea";
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.label3);
@@ -170,6 +200,28 @@
             this.label3.Size = new System.Drawing.Size(101, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Nueva Tarea";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "hh:mm tt";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(215, 98);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker2.TabIndex = 5;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(67)))), ((int)(((byte)(87)))));
+            this.button1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button1.Location = new System.Drawing.Point(498, 89);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 29);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "Agregar";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // FormInicio
             // 
@@ -210,9 +262,13 @@
         private System.Windows.Forms.Panel panelSombra2;
         private System.Windows.Forms.Panel panelSombra3;
         private System.Windows.Forms.Panel panelSombra4;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Button button1;
     }
 }
