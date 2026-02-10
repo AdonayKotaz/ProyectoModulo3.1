@@ -62,6 +62,8 @@ namespace WindowsFormsApp1.Forms
             RedondearPanel(panel2, 20);
             RedondearPanel(panel3, 20);
             RedondearPanel(panel4, 20);
+            RedondearPanel(panel5, 20);
+            RedondearPanel(panel6, 20);
             RedondearPanel(flowLayoutPanel1, 20);
 
             panelSombra.BackColor = Color.FromArgb(60, Color.Black);
