@@ -27,6 +27,9 @@ namespace WindowsFormsApp1.Forms
             InitializeComponent();
             CrearTablaSiNoExiste();
             CargarTareasPendientes();
+            CargarTotalTareas();
+            CargarTareasHoy();
+            CargarProximaTarea();
             this.MaximizeBox = false;
 
             textBox1.Text = placeholder;
@@ -70,10 +73,14 @@ namespace WindowsFormsApp1.Forms
             RedondearPanel(panel1, 20);
             RedondearPanel(panel2, 20);
             RedondearPanel(panel3, 20);
-            RedondearPanel(panel4, 20);
-            RedondearPanel(panel5, 20);
-            RedondearPanel(panel6, 20);
-            RedondearPanel(flowLayoutPanel1, 20);
+            RedondearPanel(panel4, 10);
+            RedondearPanel(panel5, 10);
+            RedondearPanel(panel6, 10);
+            RedondearPanel(panel7, 20);
+            RedondearPanel(panel8, 20);
+            RedondearPanel(panel9, 10);
+            RedondearPanel(panel10, 10);
+            RedondearPanel(panel1, 20);
 
             panelSombra.BackColor = Color.FromArgb(60, Color.Black);
             RedondearPanel(panelSombra, 20);
@@ -86,6 +93,12 @@ namespace WindowsFormsApp1.Forms
 
             panelSombra4.BackColor = Color.FromArgb(60, Color.Black);
             RedondearPanel(panelSombra4, 20);
+
+            panelSombra5.BackColor = Color.FromArgb(60, Color.Black);
+            RedondearPanel(panelSombra5, 20);
+
+            panelSombra6.BackColor = Color.FromArgb(60, Color.Black);
+            RedondearPanel(panelSombra6, 20);
         }
 
         private void panel1_SizeChanged(object sender, EventArgs e)
@@ -228,6 +241,9 @@ namespace WindowsFormsApp1.Forms
 
             //Actualizar datos
             CargarTareasPendientes();
+            CargarTotalTareas();
+            CargarTareasHoy();
+            CargarProximaTarea();
 
 
             // Limpiar campos
@@ -240,7 +256,7 @@ namespace WindowsFormsApp1.Forms
             MessageBox.Show("Tarea agregada correctamente");
         }
 
-       
+
 
         private void CargarTareasPendientes()
         {
@@ -255,21 +271,22 @@ namespace WindowsFormsApp1.Forms
         FROM Tareas
         ORDER BY Fecha, Hora";
 
-            
-                SQLiteCommand cmd = new SQLiteCommand(query, conn);
-                SQLiteDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
-                    ListViewItem item = new ListViewItem(reader["Id"].ToString());
-                    item.SubItems.Add(reader["Nombre"].ToString());
-                    item.SubItems.Add(reader["Fecha"].ToString());
-                    item.SubItems.Add(reader["Hora"].ToString());
+                    while (reader.Read())
+                    {
+                        ListViewItem item = new ListViewItem(reader["Id"].ToString());
+                        item.SubItems.Add(reader["Nombre"].ToString());
+                        item.SubItems.Add(reader["Fecha"].ToString());
+                        item.SubItems.Add(reader["Hora"].ToString());
 
-                    listViewTareas.Items.Add(item);
+                        listViewTareas.Items.Add(item);
+                    }
                 }
             }
         }
+
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -292,6 +309,9 @@ namespace WindowsFormsApp1.Forms
             }
 
             CargarTareasPendientes();
+            CargarTotalTareas();
+            CargarTareasHoy();
+            CargarProximaTarea();
 
         }
 
@@ -318,5 +338,101 @@ namespace WindowsFormsApp1.Forms
 
             CargarTareasPendientes(); // refrescar lista
         }
+
+        private void CargarTotalTareas()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT COUNT(*) FROM Tareas";
+
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                int total = Convert.ToInt32(cmd.ExecuteScalar());
+
+                label8.Text = total.ToString();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listViewTareas.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Selecciona una tarea primero");
+                return;
+            }
+
+            int id = int.Parse(listViewTareas.SelectedItems[0].Text);
+
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "DELETE FROM Tareas WHERE Id = @id";
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+            }
+
+            CargarTareasPendientes();
+            CargarTotalTareas();
+            CargarTareasHoy();
+            CargarProximaTarea();
+        }
+
+        private void CargarTareasHoy()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+                string query = "SELECT COUNT(*) FROM Tareas WHERE Fecha = date('now')";
+
+                SQLiteCommand cmd = new SQLiteCommand(query, conn);
+                int totalHoy = Convert.ToInt32(cmd.ExecuteScalar());
+
+                label9.Text = totalHoy + " ";
+            }
+
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void CargarProximaTarea()
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = @"
+        SELECT Nombre,Descripcion, Fecha, Hora
+        FROM Tareas
+        WHERE Fecha >= date('now')
+        ORDER BY Fecha, Hora
+        LIMIT 1";
+
+                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        label10.Text =
+                            reader["Nombre"].ToString() + "\n" +
+                            reader["Descripcion"].ToString() + "\n" +
+                            reader["Fecha"].ToString() + " - " +
+                            reader["Hora"].ToString();
+                    }
+                    else
+                    {
+                        label10.Text = "No hay tareas próximas";
+                    }
+                }
+            }
+        }
+
+
+
+
     }
 }
